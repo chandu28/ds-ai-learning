@@ -12,6 +12,8 @@ dependencies = [
     "scikit-learn>=1.9.1",
     "scipy>=1.18.1",
     "seaborn>=0.13.2",
+    "snowflake-connector-python>=4.8.1",
+    "snowflake-snowpark-python>=1.57.0",
 ]
 
 [dependency-groups]
