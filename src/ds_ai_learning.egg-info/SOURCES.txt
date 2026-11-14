@@ -1,0 +1,10 @@
+README.md
+pyproject.toml
+src/ds_ai_learning/__init__.py
+src/ds_ai_learning/utils.py
+src/ds_ai_learning.egg-info/PKG-INFO
+src/ds_ai_learning.egg-info/SOURCES.txt
+src/ds_ai_learning.egg-info/dependency_links.txt
+src/ds_ai_learning.egg-info/requires.txt
+src/ds_ai_learning.egg-info/top_level.txt
+tests/test_basic.py
