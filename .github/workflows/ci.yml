@@ -1,4 +1,5 @@
-name: Python CI
+
+name: Python CI and Security
 
 on:
   pull_request:
@@ -6,13 +7,18 @@ on:
   push:
     branches: [main]
 
+permissions:
+  contents: read
+
 jobs:
-  quality-checks:
+  quality-and-security:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
 
       - name: Install uv
         uses: astral-sh/setup-uv@v6
@@ -26,5 +32,17 @@ jobs:
       - name: Run Ruff
         run: uv run ruff check .
 
+      - name: Run Bandit
+        run: uv run bandit -r src/
+
+      - name: Audit dependencies
+        run: uv run pip-audit --skip-editable
+
       - name: Run tests
         run: uv run pytest
+
+      - name: Scan Git history for secrets
+        uses: gitleaks/gitleaks-action@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_ENABLE_COMMENTS: false
